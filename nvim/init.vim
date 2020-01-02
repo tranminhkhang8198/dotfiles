@@ -10,6 +10,8 @@ Plug 'scrooloose/nerdtree'
 Plug 'christoomey/vim-tmux-navigator'
 
 " Syntax For Languages
+" --> TS syntax
+Plug 'leafgarland/typescript-vim'
 
 " Nice status bar
 Plug 'vim-airline/vim-airline'
@@ -187,6 +189,12 @@ nnoremap <leader>w :Gstatus<cr>
 " Make workflow
 nnoremap <leader>m :let &makeprg=""<left>
 nnoremap <silent> <Leader>b :cclose<cr>:silent !clear<cr>:make<cr>"
+
+autocmd FileType typescript setlocal formatprg=prettier\ --parser\ typescript
+
+" Set number
+set number
+set relativenumber
 
 " Insert new line before/after without insert mode
 nmap o o<Esc>

@@ -39,3 +39,10 @@ bind -n C-\ run "(tmux display-message -p '#{pane_current_command}' | grep -iq v
 https://github.com/neoclide/coc.nvim/wiki/Install-coc.nvim
 ```
 
+## Install tmux
+```
+sudo apt-get install tmux
+
+### Apply config
+tmux source-file /absolute/path/to/your/.tmux.conf
+```
