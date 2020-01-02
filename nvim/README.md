@@ -7,7 +7,7 @@ curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs \
 
 [vim-plug]: https://github.com/junegunn/vim-plug
 
-Remapping ESC to Caps Lock
+### Remapping ESC to Caps Lock
 
 ```
 sudo apt-get install dconf-tools
