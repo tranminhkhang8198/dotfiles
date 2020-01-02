@@ -43,6 +43,9 @@ https://github.com/neoclide/coc.nvim/wiki/Install-coc.nvim
 ```
 sudo apt-get install tmux
 
+### Tmux config github link
+https://github.com/gpakosz/.tmux
+
 ### Apply config
 tmux source-file /absolute/path/to/your/.tmux.conf
 ```
