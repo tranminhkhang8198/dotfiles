@@ -188,17 +188,6 @@ nnoremap <leader>w :Gstatus<cr>
 nnoremap <leader>m :let &makeprg=""<left>
 nnoremap <silent> <Leader>b :cclose<cr>:silent !clear<cr>:make<cr>"
 
-" Coc config
-let g:coc_global_extensions = [
-	\ 'coc-snippets',
-	\ 'coc-pairs',
-	\ 'coc-tsserver',
-	\ 'coc-eslint',
-	\ 'coc-prettier',
-	\ 'coc-json',
-	\ ]
-
-
 " Insert new line before/after without insert mode
 nmap o o<Esc>
 nmap O O<Esc>

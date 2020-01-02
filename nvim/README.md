@@ -34,5 +34,8 @@ bind -n C-l run "(tmux display-message -p '#{pane_current_command}' | grep -iq v
 bind -n C-\ run "(tmux display-message -p '#{pane_current_command}' | grep -iq vim && tmux send-keys 'C-\\') || tmux select-pane -l"
 ```
 
-
+## Install coc vim
+```
+https://github.com/neoclide/coc.nvim/wiki/Install-coc.nvim
+```
 
