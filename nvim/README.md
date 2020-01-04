@@ -25,7 +25,26 @@ sudo apt-get install dconf-tools
 dconf write /org/gnome/desktop/input-sources/xkb-options "['caps:escape']"
 ```
 
-## Interacing with tmux
+
+## Install tmux
+```
+sudo apt-get install tmux
+
+### Tmux config github link
+https://github.com/gpakosz/.tmux
+
+### Apply config
+tmux source-file /absolute/path/to/your/.tmux.conf
+
+### Config tmux status like powerline
+Edit the ~/.tmux.conf.local
+tmux_conf_theme_left_separator_main='\uE0B0'
+tmux_conf_theme_left_separator_sub='\uE0B1'
+tmux_conf_theme_right_separator_main='\uE0B2'
+tmux_conf_theme_right_separator_sub='\uE0B3'
+```
+
+## Interacing with tmux like nvim
 ```
 bind -n C-h run "(tmux display-message -p '#{pane_current_command}' | grep -iq vim && tmux send-keys C-h) || tmux select-pane -L"
 bind -n C-j run "(tmux display-message -p '#{pane_current_command}' | grep -iq vim && tmux send-keys C-j) || tmux select-pane -D"
@@ -39,13 +58,3 @@ bind -n C-\ run "(tmux display-message -p '#{pane_current_command}' | grep -iq v
 https://github.com/neoclide/coc.nvim/wiki/Install-coc.nvim
 ```
 
-## Install tmux
-```
-sudo apt-get install tmux
-
-### Tmux config github link
-https://github.com/gpakosz/.tmux
-
-### Apply config
-tmux source-file /absolute/path/to/your/.tmux.conf
-```

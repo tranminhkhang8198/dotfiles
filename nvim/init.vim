@@ -5,13 +5,12 @@ let mapleader = ","
 call plug#begin('~/.local/share/nvim/plugged')
 " Use NerdTree for file browsing
 Plug 'scrooloose/nerdtree'
+Plug 'Xuyuanp/nerdtree-git-plugin'
 
 " Move to and from Tmux panes and Vim panes
 Plug 'christoomey/vim-tmux-navigator'
 
 " Syntax For Languages
-" --> TS syntax
-Plug 'leafgarland/typescript-vim'
 
 " Nice status bar
 Plug 'vim-airline/vim-airline'
@@ -47,13 +46,18 @@ Plug 'mileszs/ack.vim'
 " Coc
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
+" Vim dev icons
+Plug 'ryanoasis/vim-devicons'
+
+Plug 'sheerun/vim-polyglot'
+
 " update &runtimepath and initialize plugin system
 " Automatically executes `filetype plugin indent` on and `syntax enable`.
 call plug#end()
 
 
 " Color Scheme
-colorscheme molokai
+colorscheme gruvbox
 
 
 " Display hidden characters
@@ -103,7 +107,6 @@ set clipboard=unnamedplus
 set scrolljump=-15
 
 
-
 " Better vertical movwment for wrapped line
 nnoremap j gj
 nnoremap k gk
@@ -119,8 +122,11 @@ inoremap <F1> <Esc>
 inoremap <C-c> <Esc>
 nnoremap <C-c> :wa<cr>
 
+" [scrooloose/nerdtree]
 " Toggle NERDTree on and off
 noremap <leader>a :NERDTreeToggle<cr>
+" Chage NERDTree folder color
+
 
 " I type Wq more often than wq
 cmap Wq wq
@@ -164,25 +170,6 @@ endif
 " Quickly insert a timestamp
 nnoremap tt "=strftime("%F %T%z")<CR>p
 
-" [mileszs/ack.vim]
-if executable('rg')
-	let g:ackprg = '/usr/local/bin/rg --vimgrep'
-		nnoremap <leader>r :Ack!
-		endif
-
-" Toggle quickfix windown
-nnoremap <leader><leader> :call ToggleQuickfix()<cr>
-function! ToggleQuickfix()
-	for buffer in tabpagebuflist()
-		if bufname(buffer) == ''
-			" then it should be the quickfix window
-			cclose
-			return
-		endif
-	endfor
-	copen
-endfunction
-
 " Git status
 nnoremap <leader>w :Gstatus<cr>
 
@@ -200,10 +187,38 @@ set relativenumber
 nmap o o<Esc>
 nmap O O<Esc>
 
-" Better comment color
-" set t_Co=256
-" hi Comment ctermfg=darkblue
+" Automatically disable NERDTree
+" autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+
+" Set vertical split to the right / horizontal split to bottom
+set splitright
+set splitbelow
 
 
+" Use tab for trigger completion with characters ahead and navigate.
+" Use command ':verbose imap <tab>' to make sure tab is not mapped by other plugin.
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
 
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
+" Use <c-space> to trigger completion.
+inoremap <silent><expr> <c-space> coc#refresh()
+
+" Paste without adding new line above
+" nmap p pkdd
+
+" Jump out of [{(
+inoremap <C-e> <Esc>%%a
+
+" [ryanoasis/vim-devicons]
+set encoding=UTF-8
+set guifont=Ubuntu\ Nerd\ Font\ 11
+let g:airline_powerline_fonts = 1
 
