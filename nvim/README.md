@@ -44,6 +44,24 @@ tmux_conf_theme_right_separator_main='\uE0B2'
 tmux_conf_theme_right_separator_sub='\uE0B3'
 ```
 
+```
+### Setting for coppy mode in tmux as vi and copy tmux buffer to system clipboard
+Link: squidarth.com/programming/2018/12/14/tmux-linux.html
+
+Adding to ~/.tmux.conf
+# Using tmux as vi in copy-mode
+set-window-option -g mode-keys vi
+set -g status-keys vi
+
+# Copy tmux buffer to clipboard
+# For binding 'y' to copy and exiting selection mode
+bind-key -T copy-mode-vi y send-keys -X copy-pipe-and-cancel 'xclip -sel clip -i'
+
+# For binding 'Enter' to copy and not leave selection mode
+bind-key -T copy-mode-vi Enter send-keys -X copy-pipe 'xclip -sel clip -i' '\;'  send -X clear-selection
+
+```
+
 ## Interacing with tmux like nvim
 ```
 bind -n C-h run "(tmux display-message -p '#{pane_current_command}' | grep -iq vim && tmux send-keys C-h) || tmux select-pane -L"
