@@ -7,10 +7,18 @@ call plug#begin('~/.local/share/nvim/plugged')
 Plug 'scrooloose/nerdtree'
 Plug 'Xuyuanp/nerdtree-git-plugin'
 
+" Convenience for commenting things in and out
+Plug 'scrooloose/nerdcommenter'
+
+" Show git stuff in gutter
+Plug 'airblade/vim-gitgutter'
+
+" Git integration glore
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-rhubarb'
+
 " Move to and from Tmux panes and Vim panes
 Plug 'christoomey/vim-tmux-navigator'
-
-" Syntax For Languages
 
 " Nice status bar
 Plug 'vim-airline/vim-airline'
@@ -21,21 +29,11 @@ Plug 'flazz/vim-colorschemes'
 " Auto close parens, braces, brackets, etc
 Plug 'jiangmiao/auto-pairs'
 
-" Convenience for commenting things in and out
-Plug 'scrooloose/nerdcommenter'
-
 " Hightlight trailing whitespaces
 Plug 'ntpeters/vim-better-whitespace'
 
-" Show git stuff in gutter
-Plug 'airblade/vim-gitgutter'
-
 " Indicator for what was yanked
 Plug 'machakann/vim-highlightedyank'
-
-" Git integration glore
-Plug 'tpope/vim-fugitive'
-Plug 'tpope/vim-rhubarb'
 
 " Fuzzy finder
 Plug 'junegunn/fzf'
@@ -49,6 +47,7 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 " Vim dev icons
 Plug 'ryanoasis/vim-devicons'
 
+Plug 'mattn/emmet-vim'
 Plug 'sheerun/vim-polyglot'
 
 " update &runtimepath and initialize plugin system
@@ -59,19 +58,15 @@ call plug#end()
 " Color Scheme
 colorscheme gruvbox
 
-
 " Display hidden characters
 set list
 set listchars=tab:▸\ ,eol:¬
-
-" In many terminal emulators the mouse works just fine, thus enable it.  set mouse=a
 
 " Searching
 nnoremap / /\v
 vnoremap / /\v
 set ignorecase
 set smartcase
-
 
 " Hightlight the line the cursor is on
 set cursorline
@@ -99,13 +94,11 @@ set autoindent
 set undofile
 set undodir=/tmp
 
-
 " OS x copy sharing
 set clipboard=unnamedplus
 
 " Acelerated scrolling
 set scrolljump=-15
-
 
 " Better vertical movwment for wrapped line
 nnoremap j gj
@@ -125,11 +118,9 @@ nnoremap <C-c> :wa<cr>
 " [scrooloose/nerdtree]
 " Toggle NERDTree on and off
 noremap <leader>a :NERDTreeToggle<cr>
-" Chage NERDTree folder color
-
-
-" I type Wq more often than wq
-cmap Wq wq
+" Fixed moving up and down from NERDTree
+let g:NERDTreeMapJumpNextSibling = '<Nop>'
+let g:NERDTreeMapJumpPrevSibling = '<Nop>'
 
 " [scrooloose/nerdcommenter]
 " Don't be too smart across lines
@@ -173,12 +164,6 @@ nnoremap tt "=strftime("%F %T%z")<CR>p
 " Git status
 nnoremap <leader>w :Gstatus<cr>
 
-" Make workflow
-nnoremap <leader>m :let &makeprg=""<left>
-nnoremap <silent> <Leader>b :cclose<cr>:silent !clear<cr>:make<cr>"
-
-autocmd FileType typescript setlocal formatprg=prettier\ --parser\ typescript
-
 " Set number
 set number
 set relativenumber
@@ -187,14 +172,11 @@ set relativenumber
 nmap o o<Esc>
 nmap O O<Esc>
 
-" Automatically disable NERDTree
-" autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
-
 " Set vertical split to the right / horizontal split to bottom
 set splitright
 set splitbelow
 
-
+" [neoclide/coc.nvim]
 " Use tab for trigger completion with characters ahead and navigate.
 " Use command ':verbose imap <tab>' to make sure tab is not mapped by other plugin.
 inoremap <silent><expr> <TAB>
@@ -211,14 +193,18 @@ endfunction
 " Use <c-space> to trigger completion.
 inoremap <silent><expr> <c-space> coc#refresh()
 
-" Paste without adding new line above
-" nmap p pkdd
-
-" Jump out of [{(
-inoremap <C-e> <Esc>%%a
+" Use <cr> to confirm completion, `<C-g>u` means break undo chain at current position.
+" Coc only does snippet and additional edit on confirm.
+inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 
 " [ryanoasis/vim-devicons]
 set encoding=UTF-8
 set guifont=Ubuntu\ Nerd\ Font\ 11
 let g:airline_powerline_fonts = 1
 
+" [mattn/emmet-vim]
+" Redefine trigger key
+let g:user_emmet_leader_key=','
+
+" Jump out of [{(
+inoremap <C-e> <Esc>%%a
