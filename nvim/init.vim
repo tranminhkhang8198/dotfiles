@@ -23,9 +23,6 @@ Plug 'christoomey/vim-tmux-navigator'
 " Nice status bar
 Plug 'vim-airline/vim-airline'
 
-" Colors Scheme
-Plug 'flazz/vim-colorschemes'
-
 " Auto close parens, braces, brackets, etc
 Plug 'jiangmiao/auto-pairs'
 
@@ -38,25 +35,39 @@ Plug 'machakann/vim-highlightedyank'
 " Fuzzy finder
 Plug 'junegunn/fzf'
 
-" Better than grepprg
-Plug 'mileszs/ack.vim'
-
 " Coc
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 " Vim dev icons
 Plug 'ryanoasis/vim-devicons'
 
+" HTML emmet
 Plug 'mattn/emmet-vim'
+
+" Syntax hightlighting
 Plug 'sheerun/vim-polyglot'
+
+" Colors Scheme
+" Plug 'dikiaap/minimalist'
+Plug 'morhetz/gruvbox'
+
+" Syntax
+Plug 'dense-analysis/ale'
+Plug 'leafgarland/typescript-vim'
+
+" Vim airline theme
+" Plug 'vim-airline/vim-airline-themes'
 
 " update &runtimepath and initialize plugin system
 " Automatically executes `filetype plugin indent` on and `syntax enable`.
 call plug#end()
 
-
-" Color Scheme
+" [Color Scheme]
 colorscheme gruvbox
+" set t_Co=256
+" syntax on
+" colorscheme minimalist
+
 
 " Display hidden characters
 set list
@@ -117,20 +128,21 @@ nnoremap <C-c> :wa<cr>
 
 " [scrooloose/nerdtree]
 " Toggle NERDTree on and off
+nmap <Leader>r :NERDTreeRefreshRoot<cr>
 noremap <leader>a :NERDTreeToggle<cr>
+
 " Fixed moving up and down from NERDTree
 let g:NERDTreeMapJumpNextSibling = '<Nop>'
 let g:NERDTreeMapJumpPrevSibling = '<Nop>'
+
+let NERDTreeMinimalUI = 1
+let NERDTreeDirArrows = 1
 
 " [scrooloose/nerdcommenter]
 " Don't be too smart across lines
 let g:AutoPairsMultilineClose=0
 " Don't insert extra spaces
 let g:AutoPairsMapSpace=0
-
-" Use arrow keys to switch tabs
-nnoremap <Left> :tabprevious<CR>
-nnoremap <Right> :tabnext<CR>
 
 " Column limits
 set textwidth=110
@@ -150,19 +162,8 @@ function! ToggleColumnWidth()
     endif
 endfunction
 
-" Sort lines in alphabetical order
-vnoremap <leader>s :'<,'>!sort -f<cr>
-
 " FZF
-if executable('fzf')
-    nnoremap <C-p> :FZF<cr>
-endif
-
-" Quickly insert a timestamp
-nnoremap tt "=strftime("%F %T%z")<CR>p
-
-" Git status
-nnoremap <leader>w :Gstatus<cr>
+nnoremap <C-p> :FZF<cr>
 
 " Set number
 set number
@@ -180,14 +181,14 @@ set splitbelow
 " Use tab for trigger completion with characters ahead and navigate.
 " Use command ':verbose imap <tab>' to make sure tab is not mapped by other plugin.
 inoremap <silent><expr> <TAB>
-      \ pumvisible() ? "\<C-n>" :
-      \ <SID>check_back_space() ? "\<TAB>" :
-      \ coc#refresh()
+            \ pumvisible() ? "\<C-n>" :
+            \ <SID>check_back_space() ? "\<TAB>" :
+            \ coc#refresh()
 inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
 
 function! s:check_back_space() abort
-  let col = col('.') - 1
-  return !col || getline('.')[col - 1]  =~# '\s'
+    let col = col('.') - 1
+    return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
 
 " Use <c-space> to trigger completion.
@@ -196,15 +197,29 @@ inoremap <silent><expr> <c-space> coc#refresh()
 " Use <cr> to confirm completion, `<C-g>u` means break undo chain at current position.
 " Coc only does snippet and additional edit on confirm.
 inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+" END [neoclide/coc.nvim]
+
 
 " [ryanoasis/vim-devicons]
 set encoding=UTF-8
 set guifont=Ubuntu\ Nerd\ Font\ 11
 let g:airline_powerline_fonts = 1
 
+" let g:airline_theme='minimalist'
+" let g:airline_powerline_fonts = 1
+" let g:airline#extensions#tabline#enabled = 1
+
 " [mattn/emmet-vim]
 " Redefine trigger key
 let g:user_emmet_leader_key=','
 
 " Jump out of [{(
-inoremap <C-e> <Esc>%%a
+inoremap <leader>e <Esc>%%a
+
+" Save file with <leader>w
+nnoremap <leader>w :w!<Esc>
+
+" Set <leader> q for quit
+nnoremap <leader>q :q<Esc>
+
+" [prettier/vim-prettier]
