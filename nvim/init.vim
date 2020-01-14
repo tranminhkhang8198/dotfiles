@@ -55,19 +55,12 @@ Plug 'morhetz/gruvbox'
 Plug 'dense-analysis/ale'
 Plug 'leafgarland/typescript-vim'
 
-" Vim airline theme
-" Plug 'vim-airline/vim-airline-themes'
-
 " update &runtimepath and initialize plugin system
 " Automatically executes `filetype plugin indent` on and `syntax enable`.
 call plug#end()
 
 " [Color Scheme]
 colorscheme gruvbox
-" set t_Co=256
-" syntax on
-" colorscheme minimalist
-
 
 " Display hidden characters
 set list
