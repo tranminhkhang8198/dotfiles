@@ -211,6 +211,7 @@ inoremap <leader>e <Esc>%%a
 
 " Save file with <leader>w
 nnoremap <leader>w :w!<Esc>
+inoremap <leader>w :w!<Esc>
 
 " Set <leader> q for quit
 nnoremap <leader>q :q<Esc>
