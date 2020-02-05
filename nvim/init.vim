@@ -216,4 +216,6 @@ inoremap <leader>w :w!<Esc>
 " Set <leader> q for quit
 nnoremap <leader>q :q<Esc>
 
-" [prettier/vim-prettier]
+" Disable automatic comment insertion
+autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
+
